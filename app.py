@@ -51,11 +51,11 @@ ORANGE = colors.HexColor("#F39C12")
 
 def register_korean_font():
 
-    font_url = "https://github.com/googlefonts/noto-cjk/raw/main/Sans/SubsetOTF/KR/NotoSansCJKkr-Regular.otf"
+    font_url = "https://cdn.jsdelivr.net/gh/fonts-archive/NotoSansKR/NotoSansKR-Regular.otf"
 
     font_path = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
-        "NotoSansCJKkr-Regular.otf"
+        "NotoSansKR-Regular.otf"
     )
 
     if not os.path.exists(font_path):
@@ -70,6 +70,7 @@ def register_korean_font():
         pdfmetrics.registerFont(
             TTFont("NotoSansKR", font_path)
         )
+
         return "NotoSansKR"
 
     except Exception:
