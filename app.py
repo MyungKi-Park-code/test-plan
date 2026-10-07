@@ -79,6 +79,8 @@ def register_korean_font():
 
 FONT_NAME = register_korean_font()
 
+st.write("현재 PDF 폰트:", FONT_NAME)
+
 
 # =========================================================
 # PDF 공통 글자 크기
