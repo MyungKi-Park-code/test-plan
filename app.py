@@ -50,36 +50,14 @@ ORANGE = colors.HexColor("#F39C12")
 # =========================================================
 
 def register_korean_font():
-
-    font_url = "https://cdn.jsdelivr.net/gh/fonts-archive/NotoSansKR/NotoSansKR-Regular.otf"
-
-    font_path = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        "NotoSansKR-Regular.otf"
-    )
-
-    if not os.path.exists(font_path):
-
-        try:
-            import urllib.request
-            urllib.request.urlretrieve(font_url, font_path)
-        except Exception:
-            return "Helvetica"
-
     try:
-        pdfmetrics.registerFont(
-            TTFont("NotoSansKR", font_path)
-        )
-
-        return "NotoSansKR"
-
+        pdfmetrics.registerFont(UnicodeCIDFont("HYSMyeongJo-Medium"))
+        return "HYSMyeongJo-Medium"
     except Exception:
         return "Helvetica"
 
 
 FONT_NAME = register_korean_font()
-
-st.write("현재 PDF 폰트:", FONT_NAME)
 
 
 # =========================================================
