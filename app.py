@@ -51,24 +51,31 @@ ORANGE = colors.HexColor("#F39C12")
 
 def register_korean_font():
 
-    regular = r"C:\Windows\Fonts\malgun.ttf"
-    bold = r"C:\Windows\Fonts\malgunbd.ttf"
+    register_korean_font():
 
-    if os.path.exists(regular):
+    font_url = "https://github.com/googlefonts/noto-cjk/raw/main/Sans/SubsetOTF/KR/NotoSansCJKkr-Regular.otf"
 
+    font_path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        "NotoSansCJKkr-Regular.otf"
+    )
+
+    if not os.path.exists(font_path):
+
+        try:
+            import urllib.request
+            urllib.request.urlretrieve(font_url, font_path)
+        except Exception:
+            return "Helvetica"
+
+    try:
         pdfmetrics.registerFont(
-            TTFont("Malgun", regular)
+            TTFont("NotoSansKR", font_path)
         )
+        return "NotoSansKR"
 
-        if os.path.exists(bold):
-
-            pdfmetrics.registerFont(
-                TTFont("Malgun-Bold", bold)
-            )
-
-        return "Malgun"
-
-    return "Helvetica"
+    except Exception:
+        return "Helvetica"
 
 
 FONT_NAME = register_korean_font()
