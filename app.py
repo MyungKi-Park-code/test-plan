@@ -51,8 +51,6 @@ ORANGE = colors.HexColor("#F39C12")
 
 def register_korean_font():
 
-    register_korean_font():
-
     font_url = "https://github.com/googlefonts/noto-cjk/raw/main/Sans/SubsetOTF/KR/NotoSansCJKkr-Regular.otf"
 
     font_path = os.path.join(
