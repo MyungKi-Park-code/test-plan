@@ -1,4 +1,3 @@
-```python
 import streamlit as st
 
 from datetime import date, timedelta
@@ -1537,4 +1536,3 @@ if st.session_state.tests:
         mime="application/pdf",
         use_container_width=True
     )
-```
