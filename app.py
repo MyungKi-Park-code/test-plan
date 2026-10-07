@@ -52,7 +52,9 @@ ORANGE = colors.HexColor("#F39C12")
 
 def register_korean_font():
     try:
-        pdfmetrics.registerFont(UnicodeCIDFont("HYSMyeongJo-Medium"))
+        pdfmetrics.registerFont(
+            UnicodeCIDFont("HYSMyeongJo-Medium")
+        )
         return "HYSMyeongJo-Medium"
     except Exception:
         return "Helvetica"
@@ -123,8 +125,6 @@ def calculate_schedule(start_date, tests):
 
     schedule = []
 
-    current_date = start_date
-
     for i, test in enumerate(tests):
 
         period = int(test["period"])
@@ -132,8 +132,18 @@ def calculate_schedule(start_date, tests):
         # 시간 → 일수
         days = max(1, math.ceil(period / 24))
 
-        test_start = current_date
-        test_end = test_start + timedelta(days=days - 1)
+        # 시험별로 입력한 시작일 사용
+        # 기존에 추가된 시험에 start_date가 없으면
+        # 프로젝트 시험 시작일을 사용
+        test_start = test.get(
+            "start_date",
+            start_date
+        )
+
+        test_end = (
+            test_start +
+            timedelta(days=days - 1)
+        )
 
         schedule.append({
             "no": i + 1,
@@ -145,8 +155,6 @@ def calculate_schedule(start_date, tests):
             "end": test_end,
             "remark": test["remark"]
         })
-
-        current_date = test_end + timedelta(days=1)
 
     return schedule
 
@@ -1324,7 +1332,7 @@ with c2:
     )
 
 
-c3, c4 = st.columns([1.2, 0.8])
+c3, c4, c5 = st.columns([1.0, 0.7, 1.0])
 
 with c3:
 
@@ -1341,6 +1349,13 @@ with c4:
         value=24,
         step=1,
         format="%d"
+    )
+
+with c5:
+
+    test_start_date = st.date_input(
+        "시험 시작일자",
+        value=start_date
     )
 
 
@@ -1372,6 +1387,8 @@ if st.button(
             "condition": test_condition,
 
             "period": int(test_period),
+
+            "start_date": test_start_date,
 
             "remark": test_remark
 
