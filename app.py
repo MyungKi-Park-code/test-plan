@@ -1,5 +1,5 @@
+```python
 import streamlit as st
-import streamlit.components.v1 as components
 
 from datetime import date, timedelta
 from reportlab.lib import colors
@@ -1504,11 +1504,7 @@ if st.session_state.tests:
         result_date
     )
 
-    components.html(
-        timeline_html,
-        height=250,
-        scrolling=True
-    )
+    st.html(timeline_html)
 
 
 # =========================================================
@@ -1541,3 +1537,4 @@ if st.session_state.tests:
         mime="application/pdf",
         use_container_width=True
     )
+```
